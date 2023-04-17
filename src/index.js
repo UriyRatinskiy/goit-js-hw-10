@@ -1,24 +1,12 @@
 import './css/styles.css';
+import fetchCountries from './fetchCountries';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
-
-const countryList = document.querySelector(".country-list");
-const countryInfo = document.querySelector(".country-info");
-
-const BASE_URL = "https://restcountries.com/v3.1/all";
-const URL = `${BASE_URL}?fields=name,capital,population,flags,languages`;
-
-fetch(URL)
-.then((response) => response.json())
-.then((data) => {
-    // console.log("data", data)
-    insertContent(data.articles);
-})
-.catch((error) => { 
-    // console.log("error", error);
-});
+const searchBox = document.querySelector('#search-box');
+const countryList = document.querySelector('.country-list');
+const countryInfo = document.querySelector('.country-info');
 
 const listItem = (item) => `<li>
 <img src="${item.flags.svg}" alt="${item.flags.alt}">
