@@ -5,14 +5,12 @@ import debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
 
-const refs = getRefs();
- function getRefs() {
-    return {
+const refs = {
         searchBox: document.querySelector('#search-box'),
         listCountries: document.querySelector('.country-list'),
         countryInfo: document.querySelector('.country-info'),
     };
-}
+
 
 refs.searchBox.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
 
@@ -45,14 +43,17 @@ function searchCountry(event) {
 function createMarkupForCountries(countriesArray) {
     const markup = countriesArray.map(({ flags, name }) => {
         const itemEl = document.createElement('li');
-        itemEl.classList.add('country-item');
+              itemEl.classList.add('country-item');
+
         const flagEl = document.createElement('img');
-        flagEl.classList.add('country-flag');
-        flagEl.src = flags.svg;
-        flagEl.alt = 'flag';
-        flagEl.width = '50';
-        const nameEl = document.createElement('h3');
-        nameEl.textContent = name.official;
+              flagEl.classList.add('country-flag');
+              flagEl.src = flags.svg;
+              flagEl.alt = 'flag.alt';
+              flagEl.width = '50';
+              flagEl.height = '30';
+
+        const nameEl = document.createElement('h2');
+              nameEl.textContent = name.official;
 
         itemEl.append(flagEl, nameEl);
 
@@ -66,32 +67,35 @@ function createCardForCountry(countryArray) {
         const { flags, name, capital, population, languages } = country;
 
         const itemEl = document.createElement('div');
-        itemEl.classList.add('country-header');
+              itemEl.classList.add('country-header');
+
         const flagEl = document.createElement('img');
-        flagEl.classList.add('country-flag');
-        flagEl.src = flags.svg;
-        flagEl.alt = 'flag';
-        flagEl.width = '50';
+              flagEl.classList.add('country-flag');
+              flagEl.src = flags.svg;
+              flagEl.alt = 'flag.alt';
+              flagEl.width = '50';
+              flagEl.height = '30';
+
         const nameEl = document.createElement('h1');
-        nameEl.textContent = name.official;
+              nameEl.textContent = name.official;
 
         const bForCapital = document.createElement('b');
-        bForCapital.textContent = 'Capital: ';
+              bForCapital.textContent = 'Capital: ';
         const capitalEl = document.createElement('p');
-        capitalEl.textContent = `${capital}`;
-        capitalEl.prepend(bForCapital);
+              capitalEl.textContent = `${capital}`;
+              capitalEl.prepend(bForCapital);
 
         const bForPopulation = document.createElement('b');
-        bForPopulation.textContent = 'Population: ';
+              bForPopulation.textContent = 'Population: ';
         const populationEl = document.createElement('p');
-        populationEl.textContent = `${population}`;
-        populationEl.prepend(bForPopulation);
+              populationEl.textContent = `${population}`;
+              populationEl.prepend(bForPopulation);
 
         const bForlanguages = document.createElement('b');
-        bForlanguages.textContent = 'Languages: ';
+             bForlanguages.textContent = 'Languages: ';
         const languagesEl = document.createElement('p');
-        languagesEl.textContent = `${(languages.map(language => language.name)).join(', ')}`;
-        languagesEl.prepend(bForlanguages);
+              languagesEl.textContent = `${(languages.map(language => language.name)).join(', ')}`;
+              languagesEl.prepend(bForlanguages);
 
         itemEl.append(flagEl, nameEl);
 

@@ -4,7 +4,7 @@ export default function fetchCountries(nameCountry) {
     const URL = `${BASE_URL}/${nameCountry}?fields=name,capital,population,flags,languages`;
     return fetch(URL).then(response => {
         if (!response.ok) {
-            clearPreviousInfo();
+            
             throw new Error(response.status);
         }
         return response.json()
