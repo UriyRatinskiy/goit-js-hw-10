@@ -17,8 +17,11 @@ body {
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
+  margin-top: 20px;
 }
-
+.country-name{
+  font-size: 24px;
+}
 
 .country-list {
   list-style: none;
@@ -29,9 +32,13 @@ body {
 .country-header {
   display: flex;
   align-items: center;
-
 }
 
+
+.country-info{
+  margin: 0;
+  padding-left: 0;
+}
 .country-item:not(:last-child) {
   margin-bottom: 8px;
 }
