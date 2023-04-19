@@ -21,6 +21,8 @@ body {
 }
 .country-name{
   font-size: 24px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .country-list {
