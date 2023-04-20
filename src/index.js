@@ -15,12 +15,11 @@ const refs = {
 refs.searchBox.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
 
 function searchCountry(event) {
-  
-
     let searchingCountry = event.target.value.trim();
-    if (!searchingCountry) {
-        resetMarkup(refs.listCountries);
-        resetMarkup(refs.countryInfo);
+  
+  
+    if (searchingCountry.length === 0) {  
+     
         return;
     };
 
@@ -28,22 +27,18 @@ function searchCountry(event) {
         .then(country => {
             if (country.length > 10) {
                  Notify.info("Too many matches found. Please enter a more specific name.");
+                 resetMarkup();
             }
-            else if (country.length <= 10 && country.length >= 2) {
-                resetMarkup(refs.listCountries);
+            else if (country.length <= 10 && country.length >= 2) {              
                 createMarkupForCountries(country);
-                resetMarkup(refs.countryInfo);
             }
-            else {
-                resetMarkup(refs.countryInfo);
-                createCardForCountry(country);
-                resetMarkup(refs.listCountries);
+            else {           
+                createCardForCountry(country);         
             }
         })
-        .catch(error => {
-            resetMarkup(refs.listCountries);
-            resetMarkup(refs.countryInfo);
+        .catch(error => {     
             Notify.failure("Oops, there is no country with that name");
+            resetMarkup();
         });
 }
 
@@ -56,6 +51,7 @@ function createMarkupForCountries(countriesArray) {
         </li>`;
         })
    .join('');
+   resetMarkup();
    return refs.listCountries.insertAdjacentHTML('beforeend', markup);
     }
 
@@ -80,10 +76,12 @@ function createMarkupForCountries(countriesArray) {
         </ul>`;
         })
    .join('');
+   resetMarkup();
    return refs.countryInfo.insertAdjacentHTML('beforeend', markup);
     }
 
-    function resetMarkup(element) {
-        element.innerHTML = '';
+    function resetMarkup() {
+        refs.listCountries.innerHTML = '';
+        refs.countryInfo.innerHTML = '';
       }
 
